@@ -6,7 +6,6 @@
  */
 
 package org.gridsuite.actions.dto;
-import org.gridsuite.filter.IFilterAttributes;
 import org.gridsuite.filter.utils.EquipmentType;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import java.util.UUID;
 // partial class from FilterAttributes (Filter-server)
 
 public record FilterAttributes(UUID id, EquipmentType equipmentType, String name) {
-    public IFilterAttributes toIFilterAttributes() {
+    public org.gridsuite.filter.identifierlistfilter.FilterAttributes toFilterAttributes() {
         return org.gridsuite.filter.identifierlistfilter.FilterAttributes.builder()
             .equipmentType(equipmentType)
             .name(name)

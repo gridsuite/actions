@@ -52,7 +52,7 @@ public class FilterBasedContingencyList extends AbstractContingencyList {
 
     public FiltersWithEquipmentTypes toFiltersWithEquipmentTypes() {
         return new FiltersWithEquipmentTypes(
-            filters.stream().map(FilterAttributes::toIFilterAttributes).toList(),
+            filters.stream().map(FilterAttributes::toFilterAttributes).toList(),
             selectedEquipmentTypesByFilter.stream().map(EquipmentTypesByFilter::toEquipmentTypesByFilterId).toList());
     }
 }

@@ -11,8 +11,6 @@ import org.gridsuite.actions.dto.FilterBasedContingencyList;
 import org.gridsuite.actions.dto.PersistentContingencyList;
 import org.gridsuite.actions.utils.ContingencyListType;
 import org.gridsuite.actions.utils.ContingencyListUtils;
-import org.gridsuite.filter.AbstractFilter;
-import org.gridsuite.filter.FilterLoader;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
 import org.gridsuite.filter.utils.FilterServiceUtils;
 import org.gridsuite.filter.utils.FiltersWithEquipmentTypes;
@@ -87,18 +85,6 @@ public class ContingencyListEvaluator {
     }
 
     public List<IdentifiableAttributes> evaluateFiltersNetwork(FiltersWithEquipmentTypes filtersWithEquipmentTypes, Network network) {
-        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new FilterLoader() {
-            @Override
-            public List<AbstractFilter> getFilters(List<UUID> uuids) {
-                return filterEvaluatorI.getFilters(uuids);
-            }
-
-            @Override
-            public Optional<AbstractFilter> getFilter(UUID uuid) {
-                return filterEvaluatorI.getFilters(List.of(uuid))
-                    .stream()
-                    .findFirst();
-            }
-        }).equipmentIds();
+        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new DefaultFilterLoader(filterEvaluatorI)).equipmentIds();
     }
 }

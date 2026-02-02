@@ -4,11 +4,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package utils;
+package org.gridsuite.actions.utils;
 
 import com.powsybl.contingency.*;
 import com.powsybl.iidm.network.IdentifiableType;
-import org.gridsuite.actions.utils.ContingencyListUtils;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

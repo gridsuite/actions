@@ -12,8 +12,6 @@ import com.powsybl.iidm.network.Network;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.gridsuite.actions.dto.AbstractContingencyList;
-import org.gridsuite.actions.dto.ContingencyListMetadataImpl;
 import org.gridsuite.actions.utils.ContingencyListType;
 
 import java.time.Instant;
