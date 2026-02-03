@@ -9,20 +9,20 @@ import java.util.UUID;
 
 public class DefaultFilterLoader implements FilterLoader {
 
-    private final FilterEvaluatorI filterEvaluator;
+    private final FilterProviderI filterProvider;
 
-    public DefaultFilterLoader(FilterEvaluatorI filterEvaluator) {
-        this.filterEvaluator = filterEvaluator;
+    public DefaultFilterLoader(FilterProviderI filterProvider) {
+        this.filterProvider = filterProvider;
     }
 
     @Override
     public List<AbstractFilter> getFilters(List<UUID> uuids) {
-        return filterEvaluator.getFilters(uuids);
+        return filterProvider.getFilters(uuids);
     }
 
     @Override
     public Optional<AbstractFilter> getFilter(UUID uuid) {
-        return filterEvaluator.getFilters(List.of(uuid))
+        return filterProvider.getFilters(List.of(uuid))
             .stream()
             .findFirst();
     }
