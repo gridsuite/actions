@@ -1,4 +1,4 @@
-package org.gridsuite.actions.utils;
+package org.gridsuite.actions.internal.utils;
 
 import com.powsybl.contingency.*;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;

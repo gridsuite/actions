@@ -1,4 +1,4 @@
-package org.gridsuite.actions;
+package org.gridsuite.actions.internal.impl;
 
 import com.powsybl.contingency.Contingency;
 import com.powsybl.contingency.ContingencyElement;
@@ -6,24 +6,25 @@ import com.powsybl.contingency.list.ContingencyList;
 import com.powsybl.iidm.network.Connectable;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.iidm.network.Terminal;
-import org.gridsuite.actions.dto.ContingencyInfos;
-import org.gridsuite.actions.dto.FilterBasedContingencyList;
-import org.gridsuite.actions.dto.PersistentContingencyList;
-import org.gridsuite.actions.utils.ContingencyListType;
-import org.gridsuite.actions.utils.ContingencyListUtils;
+import org.gridsuite.actions.api.ContingencyListEvaluator;
+import org.gridsuite.actions.api.dto.ContingencyListType;
+import org.gridsuite.actions.api.dto.contingency.FilterBasedContingencyList;
+import org.gridsuite.actions.api.dto.contingency.PersistentContingencyList;
+import org.gridsuite.actions.api.dto.evaluation.ContingencyInfos;
+import org.gridsuite.actions.internal.utils.ContingencyListUtils;
+import org.gridsuite.filter.api.FilterEvaluator;
+import org.gridsuite.filter.api.dto.FiltersWithEquipmentTypes;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
-import org.gridsuite.filter.utils.FilterServiceUtils;
-import org.gridsuite.filter.utils.FiltersWithEquipmentTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ContingencyListEvaluator {
+public class DefaultContingencyListEvaluator implements ContingencyListEvaluator {
 
-    private final FilterProviderI filterProviderI;
+    private final FilterEvaluator filterEvaluator;
 
-    public ContingencyListEvaluator(FilterProviderI filterProviderI) {
-        this.filterProviderI = filterProviderI;
+    public DefaultContingencyListEvaluator(FilterEvaluator filterEvaluator) {
+        this.filterEvaluator = filterEvaluator;
     }
 
     public List<ContingencyInfos> evaluateContingencyList(PersistentContingencyList persistentContingencyList, Network network) {
@@ -85,6 +86,6 @@ public class ContingencyListEvaluator {
     }
 
     private List<IdentifiableAttributes> evaluateFiltersNetwork(FiltersWithEquipmentTypes filtersWithEquipmentTypes, Network network) {
-        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new DefaultFilterLoader(filterProviderI)).equipmentIds();
+        return filterEvaluator.evaluateFilters(filtersWithEquipmentTypes, network).equipmentIds();
     }
 }
