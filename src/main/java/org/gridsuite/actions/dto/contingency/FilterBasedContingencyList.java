@@ -4,13 +4,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package org.gridsuite.actions.dto;
+package org.gridsuite.actions.dto.contingency;
 
 import com.powsybl.contingency.list.ContingencyList;
 import com.powsybl.iidm.network.Network;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.gridsuite.actions.dto.ContingencyListMetadataImpl;
+import org.gridsuite.actions.dto.EquipmentTypesByFilter;
+import org.gridsuite.actions.dto.FilterAttributes;
 import org.gridsuite.actions.utils.ContingencyListType;
 import org.gridsuite.filter.utils.FiltersWithEquipmentTypes;
 
