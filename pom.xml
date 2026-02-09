@@ -43,7 +43,6 @@
 
     <properties>
         <gridsuite-dependencies.version>47.0.0</gridsuite-dependencies.version>
-        <gridsuite-filter.version>1.4.0</gridsuite-filter.version>
         <sonar.organization>gridsuite</sonar.organization>
         <sonar.projectKey>org.gridsuite:actions</sonar.projectKey>
     </properties>
@@ -136,6 +135,10 @@
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-network-store-iidm-impl</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
     </dependencies>
 </project>

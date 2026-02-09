@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 class ContingencyListEvaluatorTest {
     @Test
     void testEvaluateFilterBasedContingencyList() {
-        // SETUP TEST
+        // --- Set up --- //
         // filters used for filter based contingency
         List<FilterAttributes> filtersAttributes = List.of(
             new FilterAttributes(UUID.randomUUID(), LINE, "Filter1"),
@@ -64,10 +64,13 @@ class ContingencyListEvaluatorTest {
                 )
             ).thenReturn(filteredIdentifiables);
 
-            ContingencyListEvaluator contingencyListEvaluator = new ContingencyListEvaluator(filtersUuids -> null);
             FilterBasedContingencyList filterBasedContingencyList = new FilterBasedContingencyList(UUID.randomUUID(), Instant.now(), filtersAttributes, equipmentTypesByFilter);
+
+            // --- Invoke evaluation to test --- //
+            ContingencyListEvaluator contingencyListEvaluator = new ContingencyListEvaluator(filtersUuids -> null);
             List<ContingencyInfos> contingencyInfos = contingencyListEvaluator.evaluateContingencyList(filterBasedContingencyList, network);
 
+            // --- Check --- //
             mockedFiltersServiceUtils.verify(() -> FilterServiceUtils.evaluateFiltersWithEquipmentTypes(
                     any(FiltersWithEquipmentTypes.class),
                     eq(network),
@@ -80,8 +83,8 @@ class ContingencyListEvaluatorTest {
 
     @Test
     void testEvaluateIdBasedContingencyList() {
+        // --- Set up --- //
         Network network = EurostagTutorialExample1Factory.createWithMoreGenerators();
-        ContingencyListEvaluator contingencyListEvaluator = new ContingencyListEvaluator(filtersUuids -> null);
 
         NetworkElementIdentifierContingencyList networkElementIdentifierContingencyList = new NetworkElementIdentifierContingencyList(List.of(
             new IdBasedNetworkElementIdentifier("NHV1_NHV2_1"),
@@ -90,7 +93,11 @@ class ContingencyListEvaluatorTest {
         ), "default");
         IdBasedContingencyList idBasedContingencyList = new IdBasedContingencyList(null, Instant.now(), new IdentifierContingencyList("defaultName", List.of(networkElementIdentifierContingencyList)));
 
+        // --- Invoke evaluation to test --- //
+        ContingencyListEvaluator contingencyListEvaluator = new ContingencyListEvaluator(filtersUuids -> null);
         List<ContingencyInfos> contingencyInfos = contingencyListEvaluator.evaluateContingencyList(idBasedContingencyList, network);
+
+        // --- Check --- //
         assertEquals(1, contingencyInfos.size());
         assertThat(List.of("NHV1_NHV2_1", "NHV1_NHV2_2")).usingRecursiveComparison().isEqualTo(contingencyInfos.stream().flatMap(c -> c.getContingency().getElements().stream().map(ContingencyElement::getId)).toList());
     }
