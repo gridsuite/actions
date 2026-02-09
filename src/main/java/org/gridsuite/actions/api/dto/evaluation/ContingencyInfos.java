@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package org.gridsuite.actions.dto;
+package org.gridsuite.actions.api.dto.evaluation;
 
 import com.powsybl.contingency.Contingency;
 import lombok.AllArgsConstructor;

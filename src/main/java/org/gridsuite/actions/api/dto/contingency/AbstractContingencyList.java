@@ -4,13 +4,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package org.gridsuite.actions.dto;
+package org.gridsuite.actions.api.dto.contingency;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.gridsuite.actions.utils.ContingencyListType;
+import org.gridsuite.actions.api.dto.ContingencyListMetadata;
+import org.gridsuite.actions.api.dto.ContingencyListMetadataImpl;
+import org.gridsuite.actions.api.dto.ContingencyListType;
 
 import java.time.Instant;
 import java.util.UUID;

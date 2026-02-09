@@ -43,7 +43,7 @@
 
     <properties>
         <gridsuite-dependencies.version>47.0.0</gridsuite-dependencies.version>
-        <gridsuite-filter.version>1.4.0</gridsuite-filter.version>
+        <gridsuite-filter.version>1.20.0-SNAPSHOT</gridsuite-filter.version>
         <sonar.organization>gridsuite</sonar.organization>
         <sonar.projectKey>org.gridsuite:actions</sonar.projectKey>
     </properties>
@@ -86,6 +86,7 @@
         <dependency>
             <groupId>org.gridsuite</groupId>
             <artifactId>gridsuite-filter</artifactId>
+            <version>${gridsuite-filter.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
@@ -126,6 +127,13 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations-jakarta</artifactId>
+            <version>2.2.9</version>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
