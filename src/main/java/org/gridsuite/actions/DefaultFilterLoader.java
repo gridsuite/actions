@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public class DefaultFilterLoader implements FilterLoader {
 
-    private final FilterProviderI filterProvider;
+    private final FilterProvider filterProvider;
 
-    public DefaultFilterLoader(FilterProviderI filterProvider) {
+    public DefaultFilterLoader(FilterProvider filterProvider) {
         this.filterProvider = filterProvider;
     }
 

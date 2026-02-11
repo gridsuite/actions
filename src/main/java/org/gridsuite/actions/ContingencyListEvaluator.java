@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 public class ContingencyListEvaluator {
 
-    private final FilterProviderI filterProviderI;
+    private final FilterProvider filterProvider;
 
-    public ContingencyListEvaluator(FilterProviderI filterProviderI) {
-        this.filterProviderI = filterProviderI;
+    public ContingencyListEvaluator(FilterProvider filterProvider) {
+        this.filterProvider = filterProvider;
     }
 
     public List<ContingencyInfos> evaluateContingencyList(PersistentContingencyList persistentContingencyList, Network network) {
@@ -85,6 +85,6 @@ public class ContingencyListEvaluator {
     }
 
     private List<IdentifiableAttributes> evaluateFiltersNetwork(FiltersWithEquipmentTypes filtersWithEquipmentTypes, Network network) {
-        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new DefaultFilterLoader(filterProviderI)).equipmentIds();
+        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new DefaultFilterLoader(filterProvider)).equipmentIds();
     }
 }
