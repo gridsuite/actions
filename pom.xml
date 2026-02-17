@@ -44,7 +44,7 @@
     <properties>
         <sonar.organization>gridsuite</sonar.organization>
         <sonar.projectKey>org.gridsuite:actions</sonar.projectKey>
-        <powsybl-ws-dependencies.version>2.21.0</powsybl-ws-dependencies.version>
+        <powsybl-ws-dependencies.version>2.30.0</powsybl-ws-dependencies.version>
         <gridsuite-filter.version>1.21.0</gridsuite-filter.version>
     </properties>
 
