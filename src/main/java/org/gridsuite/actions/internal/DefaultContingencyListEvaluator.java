@@ -21,18 +21,53 @@ import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Default {@link ContingencyListEvaluator} implementation.
+ * <p>
+ * For {@link ContingencyListType#FILTERS} lists, this evaluator delegates filter resolution to a
+ * {@link FilterEvaluator} and builds a Powsybl {@link ContingencyList} from the resulting equipment identifiers.
+ * For other list types, it relies on {@link PersistentContingencyList#toPowsyblContingencyList(Network)}.
+ * </p>
+ * <p>
+ * The returned {@link ContingencyInfos} include, for each contingency:
+ * </p>
+ * <ul>
+ *   <li>the Powsybl {@link Contingency} when it can be constructed (may be {@code null}),</li>
+ *   <li>the set of elements not found in the network,</li>
+ *   <li>the set of elements that exist but are currently disconnected (based on {@link Terminal#isConnected()}).</li>
+ * </ul>
+ */
 public class DefaultContingencyListEvaluator implements ContingencyListEvaluator {
 
     private final FilterEvaluator filterEvaluator;
 
+    /**
+     * Creates an evaluator that can resolve filter-based contingency lists using the provided {@link FilterProvider}.
+     *
+     * @param filterProvider provider used to load filter definitions referenced by the contingency list
+     */
     public DefaultContingencyListEvaluator(FilterProvider filterProvider) {
         this.filterEvaluator = FilterEvaluatorFactory.create(filterProvider::getFilters);
     }
 
+    /**
+     * Creates an evaluator using the given {@link FilterEvaluator}.
+     *
+     * @param filterEvaluator filter evaluator used to resolve filter-based contingency lists
+     */
     public DefaultContingencyListEvaluator(FilterEvaluator filterEvaluator) {
         this.filterEvaluator = filterEvaluator;
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Note: when a GridSuite contingency references only elements that are not found in the network,
+     * a corresponding Powsybl {@link Contingency} may not be created; in that case the returned
+     * {@link ContingencyInfos} contains a {@code null} contingency and a non-empty "not found" set.
+     * </p>
+     */
+    @Override
     public List<ContingencyInfos> evaluateContingencyList(PersistentContingencyList persistentContingencyList, Network network) {
         List<Contingency> contingencies = getPowsyblContingencies(persistentContingencyList, network);
         Map<String, Set<String>> notFoundElements = persistentContingencyList.getNotFoundElements(network);
