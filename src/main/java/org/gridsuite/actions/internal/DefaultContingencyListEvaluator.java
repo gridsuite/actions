@@ -7,12 +7,14 @@ import com.powsybl.iidm.network.Connectable;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.iidm.network.Terminal;
 import org.gridsuite.actions.api.ContingencyListEvaluator;
+import org.gridsuite.actions.api.FilterProvider;
 import org.gridsuite.actions.api.dto.ContingencyListType;
 import org.gridsuite.actions.api.dto.contingency.FilterBasedContingencyList;
 import org.gridsuite.actions.api.dto.contingency.PersistentContingencyList;
 import org.gridsuite.actions.api.dto.evaluation.ContingencyInfos;
 import org.gridsuite.actions.internal.utils.ContingencyListUtils;
 import org.gridsuite.filter.api.FilterEvaluator;
+import org.gridsuite.filter.api.FilterEvaluatorFactory;
 import org.gridsuite.filter.api.dto.FiltersWithEquipmentTypes;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
 
@@ -22,6 +24,10 @@ import java.util.stream.Collectors;
 public class DefaultContingencyListEvaluator implements ContingencyListEvaluator {
 
     private final FilterEvaluator filterEvaluator;
+
+    public DefaultContingencyListEvaluator(FilterProvider filterProvider) {
+        this.filterEvaluator = FilterEvaluatorFactory.create(filterProvider::getFilters);
+    }
 
     public DefaultContingencyListEvaluator(FilterEvaluator filterEvaluator) {
         this.filterEvaluator = filterEvaluator;
