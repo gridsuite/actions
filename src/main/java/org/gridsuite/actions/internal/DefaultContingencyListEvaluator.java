@@ -1,10 +1,4 @@
-/**
- * Copyright (c) 2026, RTE (http://www.rte-france.com)
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- */
-package org.gridsuite.actions;
+package org.gridsuite.actions.internal;
 
 import com.powsybl.contingency.Contingency;
 import com.powsybl.contingency.ContingencyElement;
@@ -12,29 +6,68 @@ import com.powsybl.contingency.list.ContingencyList;
 import com.powsybl.iidm.network.Connectable;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.iidm.network.Terminal;
-import org.gridsuite.actions.dto.evaluation.ContingencyInfos;
-import org.gridsuite.actions.dto.contingency.FilterBasedContingencyList;
-import org.gridsuite.actions.dto.contingency.PersistentContingencyList;
-import org.gridsuite.actions.utils.ContingencyListType;
-import org.gridsuite.actions.utils.ContingencyListUtils;
+import org.gridsuite.actions.api.ContingencyListEvaluator;
+import org.gridsuite.actions.api.FilterProvider;
+import org.gridsuite.actions.api.dto.ContingencyListType;
+import org.gridsuite.actions.api.dto.contingency.FilterBasedContingencyList;
+import org.gridsuite.actions.api.dto.contingency.PersistentContingencyList;
+import org.gridsuite.actions.api.dto.evaluation.ContingencyInfos;
+import org.gridsuite.actions.internal.utils.ContingencyListUtils;
+import org.gridsuite.filter.api.FilterEvaluator;
+import org.gridsuite.filter.api.FilterEvaluatorFactory;
+import org.gridsuite.filter.api.dto.FiltersWithEquipmentTypes;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
-import org.gridsuite.filter.utils.FilterServiceUtils;
-import org.gridsuite.filter.utils.FiltersWithEquipmentTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author Kevin Le Saulnier <kevin.le-saulnier at rte-france.com>
+ * Default {@link ContingencyListEvaluator} implementation.
+ * <p>
+ * For {@link ContingencyListType#FILTERS} lists, this evaluator delegates filter resolution to a
+ * {@link FilterEvaluator} and builds a Powsybl {@link ContingencyList} from the resulting equipment identifiers.
+ * For other list types, it relies on {@link PersistentContingencyList#toPowsyblContingencyList(Network)}.
+ * </p>
+ * <p>
+ * The returned {@link ContingencyInfos} include, for each contingency:
+ * </p>
+ * <ul>
+ *   <li>the Powsybl {@link Contingency} when it can be constructed (may be {@code null}),</li>
+ *   <li>the set of elements not found in the network,</li>
+ *   <li>the set of elements that exist but are currently disconnected (based on {@link Terminal#isConnected()}).</li>
+ * </ul>
  */
-public class ContingencyListEvaluator {
+public class DefaultContingencyListEvaluator implements ContingencyListEvaluator {
 
-    private final FilterProvider filterProvider;
+    private final FilterEvaluator filterEvaluator;
 
-    public ContingencyListEvaluator(FilterProvider filterProvider) {
-        this.filterProvider = filterProvider;
+    /**
+     * Creates an evaluator that can resolve filter-based contingency lists using the provided {@link FilterProvider}.
+     *
+     * @param filterProvider provider used to load filter definitions referenced by the contingency list
+     */
+    public DefaultContingencyListEvaluator(FilterProvider filterProvider) {
+        this.filterEvaluator = FilterEvaluatorFactory.create(filterProvider::getFilters);
     }
 
+    /**
+     * Creates an evaluator using the given {@link FilterEvaluator}.
+     *
+     * @param filterEvaluator filter evaluator used to resolve filter-based contingency lists
+     */
+    public DefaultContingencyListEvaluator(FilterEvaluator filterEvaluator) {
+        this.filterEvaluator = filterEvaluator;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Note: when a GridSuite contingency references only elements that are not found in the network,
+     * a corresponding Powsybl {@link Contingency} may not be created; in that case the returned
+     * {@link ContingencyInfos} contains a {@code null} contingency and a non-empty "not found" set.
+     * </p>
+     */
+    @Override
     public List<ContingencyInfos> evaluateContingencyList(PersistentContingencyList persistentContingencyList, Network network) {
         List<Contingency> contingencies = getPowsyblContingencies(persistentContingencyList, network);
         Map<String, Set<String>> notFoundElements = persistentContingencyList.getNotFoundElements(network);
@@ -94,6 +127,6 @@ public class ContingencyListEvaluator {
     }
 
     private List<IdentifiableAttributes> evaluateFiltersNetwork(FiltersWithEquipmentTypes filtersWithEquipmentTypes, Network network) {
-        return FilterServiceUtils.evaluateFiltersWithEquipmentTypes(filtersWithEquipmentTypes, network, new DefaultFilterLoader(filterProvider)).equipmentIds();
+        return filterEvaluator.evaluateFilters(filtersWithEquipmentTypes, network).equipmentIds();
     }
 }

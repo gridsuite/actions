@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package org.gridsuite.actions.dto;
+package org.gridsuite.actions.api.dto;
 import org.gridsuite.filter.utils.EquipmentType;
 
 import java.util.UUID;
@@ -17,8 +17,8 @@ import java.util.UUID;
 // partial class from FilterAttributes (Filter-server)
 
 public record FilterAttributes(UUID id, EquipmentType equipmentType, String name) {
-    public org.gridsuite.filter.identifierlistfilter.FilterAttributes toFilterAttributes() {
-        return org.gridsuite.filter.identifierlistfilter.FilterAttributes.builder()
+    public org.gridsuite.filter.api.dto.FilterAttributes toFilterAttributes() {
+        return org.gridsuite.filter.api.dto.FilterAttributes.builder()
             .equipmentType(equipmentType)
             .name(name)
             .id(id)

@@ -45,7 +45,7 @@
         <sonar.organization>gridsuite</sonar.organization>
         <sonar.projectKey>org.gridsuite:actions</sonar.projectKey>
         <powsybl-ws-dependencies.version>2.30.0</powsybl-ws-dependencies.version>
-        <gridsuite-filter.version>1.21.0</gridsuite-filter.version>
+        <gridsuite-filter.version>1.22.0-SNAPSHOT</gridsuite-filter.version>
     </properties>
 
     <build>
@@ -75,6 +75,8 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- imports -->
             <dependency>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-ws-dependencies</artifactId>
@@ -82,6 +84,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- project specific dependencies -->
         </dependencies>
     </dependencyManagement>
 
