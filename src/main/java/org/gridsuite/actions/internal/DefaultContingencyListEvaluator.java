@@ -1,4 +1,4 @@
-package org.gridsuite.actions.internal.impl;
+package org.gridsuite.actions.internal;
 
 import com.powsybl.contingency.Contingency;
 import com.powsybl.contingency.ContingencyElement;

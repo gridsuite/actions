@@ -1,4 +1,4 @@
-package org.gridsuite.actions.internal.impl;
+package org.gridsuite.actions.internal;
 
 import com.powsybl.contingency.ContingencyElement;
 import com.powsybl.contingency.list.IdentifierContingencyList;
@@ -17,7 +17,7 @@ import org.gridsuite.filter.api.FilterEvaluator;
 import org.gridsuite.filter.api.dto.FiltersWithEquipmentTypes;
 import org.gridsuite.filter.identifierlistfilter.FilteredIdentifiables;
 import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
-import org.gridsuite.filter.internal.impl.DefaultFilterEvaluator;
+import org.gridsuite.filter.internal.DefaultFilterEvaluator;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;

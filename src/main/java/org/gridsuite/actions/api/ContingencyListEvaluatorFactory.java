@@ -1,6 +1,6 @@
 package org.gridsuite.actions.api;
 
-import org.gridsuite.actions.internal.impl.DefaultContingencyListEvaluator;
+import org.gridsuite.actions.internal.DefaultContingencyListEvaluator;
 import org.gridsuite.filter.api.FilterEvaluator;
 
 import java.util.Objects;
