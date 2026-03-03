@@ -6,6 +6,8 @@
  */
 package org.gridsuite.actions.dto.contingency;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.powsybl.contingency.list.ContingencyList;
 import com.powsybl.iidm.network.Network;
 import org.gridsuite.actions.dto.ContingencyListMetadata;
@@ -16,6 +18,16 @@ import java.util.Set;
 /**
  * @author Etienne Homer <etienne.homer@rte-france.com>
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    property = "type",
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    visible = true
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = IdBasedContingencyList.class, name = "IDENTIFIERS"),
+    @JsonSubTypes.Type(value = FilterBasedContingencyList.class, name = "FILTERS")
+})
 public interface PersistentContingencyList {
     ContingencyListMetadata getMetadata();
 
