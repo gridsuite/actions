@@ -6,6 +6,8 @@
  */
 package org.gridsuite.actions.dto.contingency;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +22,16 @@ import java.util.UUID;
 /**
  * @author Etienne Homer <etienne.homer at rte-france.com>
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    property = "type",
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    visible = true
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = IdBasedContingencyList.class, name = "IDENTIFIERS"),
+    @JsonSubTypes.Type(value = FilterBasedContingencyList.class, name = "FILTERS")
+})
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
