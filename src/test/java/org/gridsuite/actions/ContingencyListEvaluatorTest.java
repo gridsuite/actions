@@ -46,9 +46,9 @@ class ContingencyListEvaluatorTest {
         // --- Set up --- //
         // filters used for filter based contingency
         List<FilterAttributes> filtersAttributes = List.of(
-            new FilterAttributes(UUID.randomUUID(), LINE, "Filter1"),
-            new FilterAttributes(UUID.randomUUID(), SUBSTATION, "Filter2"),
-            new FilterAttributes(UUID.randomUUID(), TWO_WINDINGS_TRANSFORMER, "Filter3")
+            new FilterAttributes(UUID.randomUUID(), LINE),
+            new FilterAttributes(UUID.randomUUID(), SUBSTATION),
+            new FilterAttributes(UUID.randomUUID(), TWO_WINDINGS_TRANSFORMER)
         );
         List<EquipmentTypesByFilter> equipmentTypesByFilter = List.of(
             new EquipmentTypesByFilter(UUID.randomUUID(), Set.of(IdentifiableType.GENERATOR))
