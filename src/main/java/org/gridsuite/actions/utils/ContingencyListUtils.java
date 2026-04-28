@@ -48,8 +48,8 @@ public final class ContingencyListUtils {
             case HVDC_LINE -> {
                 return new HvdcLineContingency(id.getId());
             }
-            case DANGLING_LINE -> {
-                return new DanglingLineContingency(id.getId());
+            case BOUNDARY_LINE -> {
+                return new BoundaryLineContingency(id.getId());
             }
             case BUSBAR_SECTION -> {
                 return new BusbarSectionContingency(id.getId());
