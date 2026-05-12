@@ -35,10 +35,10 @@ public class FilterBasedContingencyList extends AbstractContingencyList {
     @Schema(description = "Selected equipment types for substation and voltage level filter")
     private List<EquipmentTypesByFilter> selectedEquipmentTypesByFilter;
 
-    public FilterBasedContingencyList(UUID uuid, Instant date, List<FilterAttributes> filtersId, List<EquipmentTypesByFilter> selectedEquipmentTypesByFilter) {
+    public FilterBasedContingencyList(UUID uuid, Instant date, List<FilterAttributes> filters, List<EquipmentTypesByFilter> selectedEquipmentTypesByFilter) {
         super(new ContingencyListMetadataImpl(uuid, ContingencyListType.FILTERS, date));
         this.filters = new ArrayList<>();
-        this.filters.addAll(filtersId);
+        this.filters.addAll(filters);
         this.selectedEquipmentTypesByFilter = new ArrayList<>();
         this.selectedEquipmentTypesByFilter.addAll(selectedEquipmentTypesByFilter);
     }

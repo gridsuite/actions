@@ -16,11 +16,10 @@ import java.util.UUID;
 
 // partial class from FilterAttributes (Filter-server)
 
-public record FilterAttributes(UUID id, EquipmentType equipmentType, String name) {
+public record FilterAttributes(UUID id, EquipmentType equipmentType) {
     public org.gridsuite.filter.identifierlistfilter.FilterAttributes toFilterAttributes() {
         return org.gridsuite.filter.identifierlistfilter.FilterAttributes.builder()
             .equipmentType(equipmentType)
-            .name(name)
             .id(id)
             .build();
     }
