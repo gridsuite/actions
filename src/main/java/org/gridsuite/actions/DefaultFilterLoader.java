@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class DefaultFilterLoader implements FilterLoader {
 
-    private final FilterProvider filterProvider;
+    private final FilterProvgider filterProvider;
 
     public DefaultFilterLoader(FilterProvider filterProvider) {
         this.filterProvider = filterProvider;
