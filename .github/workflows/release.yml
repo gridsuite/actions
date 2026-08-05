@@ -19,3 +19,4 @@ jobs:
       versionType: ${{ github.event.inputs.versionType }}
     secrets:
       VERSIONBUMP_GHAPP_PRIVATE_KEY: ${{ secrets.VERSIONBUMP_GHAPP_PRIVATE_KEY }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
