@@ -16,3 +16,4 @@ jobs:
       branchRef: ${{ github.event.inputs.branchRef }}
     secrets:
       VERSIONBUMP_GHAPP_PRIVATE_KEY: ${{ secrets.VERSIONBUMP_GHAPP_PRIVATE_KEY }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
