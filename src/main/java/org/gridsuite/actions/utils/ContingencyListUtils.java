@@ -54,6 +54,9 @@ public final class ContingencyListUtils {
             case BUSBAR_SECTION -> {
                 return new BusbarSectionContingency(id.getId());
             }
+            case SWITCH -> {
+                return new SwitchContingency(id.getId());
+            }
             default -> throw new IllegalStateException("Unexpected value: " + id.getType());
         }
     }
