@@ -7,9 +7,9 @@
 package org.gridsuite.actions.utils;
 
 import com.powsybl.iidm.network.*;
+import com.powsybl.iidm.network.impl.NetworkFactoryImpl;
 import com.powsybl.iidm.network.test.EurostagTutorialExample1Factory;
 import com.powsybl.iidm.network.test.HvdcTestNetwork;
-import com.powsybl.network.store.iidm.impl.NetworkFactoryImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
