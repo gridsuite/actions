@@ -43,7 +43,8 @@ class ContingencyListUtilsTest {
             Arguments.of("id", IdentifiableType.STATIC_VAR_COMPENSATOR, StaticVarCompensatorContingency.class),
             Arguments.of("id", IdentifiableType.HVDC_LINE, HvdcLineContingency.class),
             Arguments.of("id", IdentifiableType.BOUNDARY_LINE, BoundaryLineContingency.class),
-            Arguments.of("id", IdentifiableType.BUSBAR_SECTION, BusbarSectionContingency.class)
+            Arguments.of("id", IdentifiableType.BUSBAR_SECTION, BusbarSectionContingency.class),
+            Arguments.of("id", IdentifiableType.SWITCH, SwitchContingency.class)
         );
     }
 
