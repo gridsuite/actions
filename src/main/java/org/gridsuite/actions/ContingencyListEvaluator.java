@@ -17,7 +17,7 @@ import org.gridsuite.actions.dto.contingency.FilterBasedContingencyList;
 import org.gridsuite.actions.dto.contingency.PersistentContingencyList;
 import org.gridsuite.actions.utils.ContingencyListType;
 import org.gridsuite.actions.utils.ContingencyListUtils;
-import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
+import org.gridsuite.filter.dto.identifierlistfilter.IdentifiableAttributes;
 import org.gridsuite.filter.utils.FilterServiceUtils;
 import org.gridsuite.filter.utils.FiltersWithEquipmentTypes;
 
