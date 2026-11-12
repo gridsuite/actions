@@ -50,8 +50,7 @@
         <sonar.projectKey>org.gridsuite:actions</sonar.projectKey>
         <powsybl-ws-dependencies.version>2.34.0</powsybl-ws-dependencies.version>
 
-        <!-- FIXME remove this on next gridsuite-dependencies release -->
-        <gridsuite-filter.version>1.36.0-SNAPSHOT</gridsuite-filter.version>
+        <gridsuite-filter.version>2.0.0</gridsuite-filter.version>
     </properties>
 
     <build>
