@@ -7,7 +7,7 @@
 package org.gridsuite.actions.utils;
 
 import com.powsybl.contingency.*;
-import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
+import org.gridsuite.filter.dto.identifierlistfilter.IdentifiableAttributes;
 
 /**
  * @author Bassel El Cheikh <bassel.el-cheikh at rte-france.com>

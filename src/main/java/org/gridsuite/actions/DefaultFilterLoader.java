@@ -6,8 +6,8 @@
  */
 package org.gridsuite.actions;
 
-import org.gridsuite.filter.AbstractFilter;
 import org.gridsuite.filter.FilterLoader;
+import org.gridsuite.filter.dto.AbstractFilter;
 
 import java.util.List;
 import java.util.UUID;

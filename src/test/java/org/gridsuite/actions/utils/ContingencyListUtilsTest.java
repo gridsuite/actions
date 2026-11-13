@@ -8,7 +8,7 @@ package org.gridsuite.actions.utils;
 
 import com.powsybl.contingency.*;
 import com.powsybl.iidm.network.IdentifiableType;
-import org.gridsuite.filter.identifierlistfilter.IdentifiableAttributes;
+import org.gridsuite.filter.dto.identifierlistfilter.IdentifiableAttributes;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

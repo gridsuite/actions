@@ -17,8 +17,8 @@ import java.util.UUID;
 // partial class from FilterAttributes (Filter-server)
 
 public record FilterAttributes(UUID id, EquipmentType equipmentType) {
-    public org.gridsuite.filter.identifierlistfilter.FilterAttributes toFilterAttributes() {
-        return org.gridsuite.filter.identifierlistfilter.FilterAttributes.builder()
+    public org.gridsuite.filter.dto.identifierlistfilter.FilterAttributes toFilterAttributes() {
+        return org.gridsuite.filter.dto.identifierlistfilter.FilterAttributes.builder()
             .equipmentType(equipmentType)
             .id(id)
             .build();
